@@ -1,0 +1,40 @@
+.todoListItem {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	font-weight: 500;
+	border: 2px solid darkblue;
+	border-radius: 5px;
+	padding: 5px 2px;
+}
+
+.todoCheckbox {
+	width: 20px;
+	height: 20px;
+}
+
+.todoEditInput {
+	background-color: cornflowerblue;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 217px;
+}
+
+.todoTitle {
+	width: 230px;
+	word-wrap: break-word;
+}
+
+.button {
+	height: 25px;
+	background-color: cornflowerblue;
+	border-radius: 5px;
+}
+
+.button:active {
+	background-color: rgb(9, 77, 144);
+}
+
+.button:disabled {
+	background-color: rgb(56, 56, 173);
+}

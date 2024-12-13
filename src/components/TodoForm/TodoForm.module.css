@@ -1,0 +1,25 @@
+.todoForm {
+	display: flex;
+	gap: 30px;
+}
+
+.titleInput {
+	width: 300px;
+	height: 30px;
+	font-size: 15px;
+	background-color: cornflowerblue;
+	border-radius: 5px;
+}
+
+.button {
+	background-color: cornflowerblue;
+	border-radius: 5px;
+}
+
+.button:active {
+	background-color: rgb(9, 77, 144);
+}
+
+.button:disabled {
+	background-color: rgb(56, 56, 173);
+}

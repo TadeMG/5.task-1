@@ -1,0 +1,13 @@
+.sortButton {
+	margin-top: 20px;
+	background-color: cornflowerblue;
+	border-radius: 5px;
+}
+
+.sortButton:active {
+	background-color: rgb(9, 77, 144);
+}
+
+.sortButton:disabled {
+	background-color: rgb(56, 56, 173);
+}
