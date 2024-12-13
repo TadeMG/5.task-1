@@ -22,7 +22,7 @@ export const TodoForm = ({ onAdd, isLoading }) => {
 				onChange={handleTitleInput}
 			/>
 			<button
-				disabled={isLoading}
+				disabled={isLoading || titleInput.length < 1}
 				type="submit"
 				className={styles.button}
 				onClick={handleSubmit}

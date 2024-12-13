@@ -46,6 +46,8 @@ export const App = () => {
 				.finally(() => {
 					setTitleInput('');
 				});
+		} else {
+			setIsLoading(false);
 		}
 	};
 
