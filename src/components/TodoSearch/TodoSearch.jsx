@@ -1,37 +1,16 @@
 import styles from './TodoSearch.module.css';
 
-export const TodoSearch = ({
-	isLoading,
-	isSearching,
-	setIsSearching,
-	searchTerm,
-	setSearchTerm,
-}) => {
-	const toggleSearch = () => {
-		setIsSearching(!isSearching);
-
-		if (isSearching) {
-			setSearchTerm('');
-		}
-	};
+export const TodoSearch = ({ onSearch, searchValue }) => {
+	const handleChange = (event) => onSearch(event.target.value);
 
 	return (
-		<div className={styles.searchContainer}>
-			<button
-				className={styles.searchButton}
-				onClick={toggleSearch}
-				disabled={isLoading}
-			>
-				Поиск
-			</button>
-			<input
-				name="searchInput"
-				className={styles.searchInput}
-				type="text"
-				value={searchTerm}
-				hidden={!isSearching}
-				onChange={(event) => setSearchTerm(event.target.value)}
-			/>
-		</div>
+		<input
+			name="searchInput"
+			className={styles.searchInput}
+			type="text"
+			placeholder="Поиск"
+			value={searchValue}
+			onChange={handleChange}
+		/>
 	);
 };

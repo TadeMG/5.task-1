@@ -11,8 +11,7 @@ export const App = () => {
 	const [refreshTodoList, setRefreshTodoList] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSorted, setIsSorted] = useState(false);
-	const [isSearching, setIsSearching] = useState(false);
-	const [searchTerm, setSearchTerm] = useState('');
+	const [searchValue, setSearchValue] = useState('');
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -20,14 +19,20 @@ export const App = () => {
 		fetch('http://localhost:3005/todos')
 			.then((data) => data.json())
 			.then((todos) => {
-				if (isSorted) {
-					setTodoList(todos.sort((a, b) => a.title - b.title));
-				} else {
-					setTodoList(todos);
-				}
+				setTodoList(todos);
 			})
 			.finally(() => setIsLoading(false));
-	}, [refreshTodoList, isSorted]);
+	}, [refreshTodoList]);
+
+	useEffect(() => {
+		if (isSorted) {
+			setTodoList((prevList) =>
+				[...prevList].sort((a, b) => a.title.localeCompare(b.title)),
+			);
+		} else {
+			setTodoList((prevList) => [...prevList].sort((a, b) => a.id - b.id));
+		}
+	}, [isSorted]);
 
 	const handleItemAdd = ({ title, setTitleInput }) => {
 		if (title.length > 0) {
@@ -46,8 +51,6 @@ export const App = () => {
 				.finally(() => {
 					setTitleInput('');
 				});
-		} else {
-			setIsLoading(false);
 		}
 	};
 
@@ -82,33 +85,26 @@ export const App = () => {
 				isSorted={isSorted}
 				setIsSorted={setIsSorted}
 			/>
-			<TodoSearch
-				isLoading={isLoading}
-				isSearching={isSearching}
-				setIsSearching={setIsSearching}
-				searchTerm={searchTerm}
-				setSearchTerm={setSearchTerm}
-			/>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<ul className={styles.todoList}>
-					{todoList
-						.filter(({ title }) =>
-							title.toLowerCase().includes(searchTerm.toLowerCase()),
-						)
-						.map(({ id, title, completed }) => (
-							<TodoItem
-								key={id}
-								id={id}
-								title={title}
-								completed={completed}
-								onChange={handleItemChange}
-								onDelete={handleItemDelete}
-							/>
-						))}
-				</ul>
-			)}
+			<TodoSearch onSearch={setSearchValue} searchValue={searchValue} />
+
+			<Loader visible={isLoading} />
+
+			<ul className={styles.todoList}>
+				{todoList
+					.filter(({ title }) =>
+						title.toLowerCase().includes(searchValue.toLowerCase()),
+					)
+					.map(({ id, title, completed }) => (
+						<TodoItem
+							key={id}
+							id={id}
+							title={title}
+							completed={completed}
+							onChange={handleItemChange}
+							onDelete={handleItemDelete}
+						/>
+					))}
+			</ul>
 		</div>
 	);
 };

@@ -13,7 +13,7 @@ export const TodoForm = ({ onAdd, isLoading }) => {
 	};
 
 	return (
-		<form className={styles.todoForm}>
+		<form className={styles.todoForm} onSubmit={(event) => event.preventDefault()}>
 			<input
 				type="text"
 				name="titleInput"
@@ -22,7 +22,7 @@ export const TodoForm = ({ onAdd, isLoading }) => {
 				onChange={handleTitleInput}
 			/>
 			<button
-				disabled={isLoading || titleInput.length < 1}
+				disabled={isLoading}
 				type="submit"
 				className={styles.button}
 				onClick={handleSubmit}
