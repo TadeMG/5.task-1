@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './TodoForm.module.css';
 
-export const TodoForm = ({ onAdd, isLoading }) => {
+export const TodoForm = ({ onAdd }) => {
 	const [titleInput, setTitleInput] = useState('');
 
 	const handleTitleInput = (event) => {
@@ -21,12 +21,7 @@ export const TodoForm = ({ onAdd, isLoading }) => {
 				className={styles.titleInput}
 				onChange={handleTitleInput}
 			/>
-			<button
-				disabled={isLoading}
-				type="submit"
-				className={styles.button}
-				onClick={handleSubmit}
-			>
+			<button type="submit" className={styles.button} onClick={handleSubmit}>
 				Добавить в список
 			</button>
 		</form>
